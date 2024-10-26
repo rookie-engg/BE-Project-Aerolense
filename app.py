@@ -32,7 +32,7 @@ parser.add_argument("--classes", default="none", type=str)
 parser.add_argument("--linethickness", default=2, type=int)
 parser.add_argument(
     "--source",
-    default="F35.mp4",
+    default="test/F35.mp4",
     type=str,
 )
 parser.add_argument(
