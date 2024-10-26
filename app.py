@@ -38,7 +38,7 @@ parser.add_argument(
 parser.add_argument(
     "--weights",
     type=str,
-    default="best.pt",
+    default="v7.pt",
 )
 args = parser.parse_args()
 
