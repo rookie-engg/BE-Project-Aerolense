@@ -1,3 +1,4 @@
+import psutil
 import json, time, cv2, torch, argparse, flask, logging, socket, os
 from serial import Serial
 from flask_caching import Cache
@@ -411,15 +412,28 @@ send_original_frame_thread = Thread(
         app,
     ),
 )
-flask_app_thread = Thread(
-    target=lambda app: app.run(
+
+def target_app(app, host, port):
+    print('Server on:')
+    if host == '0.0.0.0':
+        for interface, addrs in psutil.net_if_addrs().items():
+            for addr in addrs:
+                if addr.family == socket.AF_INET and not addr.address.startswith("169.254."):
+                    print(f"\thttp://{addr.address}:{port}")
+    else:
+        print(f'http://localhost:{port}')
+
+    app.run(
         debug=False,
         port=PORT,
         host=HOST,
         use_reloader=False,
-    ),
+    )
+
+flask_app_thread = Thread(
+    target=target_app,
     daemon=True,
-    args=(app,),
+    args=(app, HOST, PORT),
 )
 
 # db_server_thread.start()
