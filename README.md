@@ -6,9 +6,13 @@
 
 ## Pip install 
 ### for only cpu version
-```pip3 install -r requirements-cpu.txt```
+```bash
+pip3 install -r requirements-cpu.txt
+```
 ### for only GPU CUDA version
-```pip3 install -r requirements-cuda.txt```
+```bash
+pip3 install -r requirements-cuda.txt
+```
 
 ### Here is a demo screenshot
 <img src="sample-screenshot.png" />
