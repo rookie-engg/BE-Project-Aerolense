@@ -4,6 +4,7 @@ from torchvision import transforms
 from threading import Event, Thread
 from ast import literal_eval
 import flask, flask_cors, cv2, torch, numpy as np, argparse
+import os
 
 # making parser
 parser = argparse.ArgumentParser(
@@ -13,7 +14,7 @@ parser = argparse.ArgumentParser(
 parser.add_argument(
     "--source",
     type=str,
-    default="C:/Users/vishal/DriveD/BE-Project/test_images/F35.mp4",
+    default=os.path.join(os.path.dirname(__file__), "test", "F35.mp4"),
     help="source to read frame else defaults to webcam",
 )
 

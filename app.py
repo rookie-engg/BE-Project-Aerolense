@@ -1,4 +1,4 @@
-import json, time, cv2, torch, argparse, flask, logging, socket
+import json, time, cv2, torch, argparse, flask, logging, socket, os
 from serial import Serial
 from flask_caching import Cache
 from collections import deque
@@ -32,20 +32,21 @@ parser.add_argument("--classes", default="none", type=str)
 parser.add_argument("--linethickness", default=2, type=int)
 parser.add_argument(
     "--source",
-    default="test/F35.mp4",
+    default=os.path.join(os.path.dirname(__file__), "test", "F35.mp4"),
     type=str,
 )
 parser.add_argument(
     "--weights",
     type=str,
-    default="v7.pt",
+    default="weights/v7.pt",
 )
 args = parser.parse_args()
 
 
 SOURCE = args.source if not args.source.isdigit() else int(args.source)
 DEVICE = torch.device(
-    (int(args.device) if args.device.isdigit() else args.device)
+    # (int(args.device) if args.device.isdigit() else args.device)
+    "cuda"
     if torch.cuda.is_available()
     else "cpu"
 )
