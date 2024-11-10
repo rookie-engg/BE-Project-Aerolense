@@ -91,8 +91,8 @@ class_names = json.dumps(deep_learning_model.names)
 
 
 app = flask.Flask(__name__)
+app.config["CACHE_TYPE"] = "SimpleCache"
 cache = Cache(app)
-app.config["CACHE_TYPE"] = "simple"
 CORS(app)
 
 
